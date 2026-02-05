@@ -5,6 +5,7 @@
 ![FastMCP](https://img.shields.io/badge/FastMCP-Server-orange.svg)
 ![STDIO](https://img.shields.io/badge/transport-STDIO-purple.svg)
 ![SSE](https://img.shields.io/badge/transport-SSE-blue.svg)
+![Docker](https://img.shields.io/badge/docker-container-blue.svg?logo=docker&logoColor=white)
 [![mcp-use](https://img.shields.io/badge/mcp--use-Client-yellow.svg)](https://github.com/mcp-use/mcp-use)
 
 A basic implementation of a Model Context Protocol (MCP) server that provides weather information using the National Weather Service API.
@@ -201,7 +202,7 @@ In this mode, the server runs as a standalone HTTP server, and clients connect t
 You must start the server first. Set the transport to `sse` using an environment variable or modify the default in `server.py`.
 
 ```bash
-# Start server in SSE mode (listening on port 8050)
+# Start server in SSE mode (listening on port 8000)
 MCP_TRANSPORT=sse uv run mcpserver/server.py
 ```
 
@@ -217,7 +218,31 @@ uv run mcpserver/client-sse.py
 The server is configured in `mcpserver/server.py`:
 - **Name**: `weather`
 - **Host**: `0.0.0.0` (SSE transport only)
-- **Port**: `8050` (SSE transport only)
+- **Port**: `8000` (SSE transport only)
+
+## Running with Docker
+
+You can run the MCP server as a Docker container. This is useful for deployment or isolation.
+
+### Build and Run
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t mcp-server .
+   ```
+
+2. **Run the container in detach mode:**
+   ```bash
+   docker run -d -p 8000:8000 --name mcp-container mcp-server
+   ```
+   This will start the server in SSE mode on port 8000.
+
+### Running Client inside Docker
+To run the client script inside the running container:
+
+```bash
+docker exec -it mcp-container uv run client-sse.py
+```
 
 ## Transport Protocol: STDIO
 
@@ -265,6 +290,9 @@ custom_mcp_server/
 │   ├── server.py       # MCP server implementation
 │   ├── client-sse.py   # SSE client
 │   └── client-stdio.py # STDIO client
+├── logger.py           # Logging configuration
+├── Dockerfile          # Docker configuration
+├── .dockerignore       # Docker ignore file
 ├── README.md           # This file
 ├── pyproject.toml      # Project dependencies
 └── requirements.txt    # Python requirements
