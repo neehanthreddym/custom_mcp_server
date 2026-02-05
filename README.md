@@ -47,11 +47,12 @@ This command will:
 
 The **MCP Inspector** is an MCP Host that allows you to interact with your server and test its tools.
 
-### Demo
+### MCP Inspector Dashboard
+#### Tools
+<img src="assets/mcp_inspector_demo.png" width=1000/>
 
-<video src="assets/basic_mcp_server_demo.mov" controls width="100%">
-  Your browser does not support the video tag.
-</video>
+#### Tool Response
+<img src="assets/mcp_inspector_tool_success.png" width=1000/>
 
 ### Using the Inspector
 
@@ -89,8 +90,6 @@ The **MCP Inspector** is an MCP Host that allows you to interact with your serve
 
 The server is configured in `server/weather.py`:
 - **Name**: `weather`
-- **Host**: `0.0.0.0` (localhost)
-- **Port**: `8050`
 
 ## Transport Protocol: STDIO
 
