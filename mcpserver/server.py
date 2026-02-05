@@ -3,7 +3,10 @@ import httpx
 from mcp.server.fastmcp import FastMCP
 import logging
 import sys
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -18,7 +21,7 @@ logger = logging.getLogger(__name__)
 mcp = FastMCP(
     name="weather",
     host="0.0.0.0", # Only for SSE transport (localhost)
-    port=8050  # Only for SSE transport
+    port=int(os.getenv("PORT", 8000))  # Only for SSE transport
 )
 
 # Constants
@@ -108,7 +111,7 @@ async def get_forecast(latitude: float, longitude: float) -> str:
 
 # Run server
 if __name__ == "__main__":
-    transport = "stdio"
+    transport = os.getenv("MCP_TRANSPORT", "sse")
     if transport == "stdio":
         logger.info("Running server with stdio transport...")
         mcp.run(transport="stdio")

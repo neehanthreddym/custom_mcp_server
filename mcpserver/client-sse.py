@@ -29,7 +29,7 @@ Initial Checks:
 
 async def main():
     # Connect server using SSE
-    async with sse_client("http://localhost:8050/sse") as (read_stream, write_stream):
+    async with sse_client("http://localhost:8000/sse") as (read_stream, write_stream):
         async with ClientSession(read_stream, write_stream) as session:
             # Initialize the connection
             await session.initialize()
