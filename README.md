@@ -4,6 +4,7 @@
 ![MCP](https://img.shields.io/badge/MCP-1.26.0+-green.svg)
 ![FastMCP](https://img.shields.io/badge/FastMCP-Server-orange.svg)
 ![STDIO](https://img.shields.io/badge/transport-STDIO-purple.svg)
+![SSE](https://img.shields.io/badge/transport-SSE-blue.svg)
 [![mcp-use](https://img.shields.io/badge/mcp--use-Client-yellow.svg)](https://github.com/mcp-use/mcp-use)
 
 A basic implementation of a Model Context Protocol (MCP) server that provides weather information using the National Weather Service API.
@@ -179,10 +180,44 @@ The chatbot (`server/client.py`) showcases:
 #### Assistant Response with Tool Usage
 <img src="assets/integrate_mcp_tool_with_chatbot_cli_Assistant.png" width=800/>
 
-## Server Configuration
+## Transport Modes
 
-The server is configured in `server/weather.py`:
+This MCP server supports two transport modes: **STDIO** (default) and **SSE**.
+
+### 1. STDIO Mode (Default)
+In this mode, the client spawns the server process and communicates via standard input/output. This is the simplest way to run locally.
+
+**Running the STDIO Client:**
+The `client-stdio.py` script automatically manages the server lifecycle.
+
+```bash
+uv run mcpserver/client-stdio.py
+```
+
+### 2. SSE Mode (Server-Sent Events)
+In this mode, the server runs as a standalone HTTP server, and clients connect to it. This is useful for remote connections or multiple clients.
+
+**Step 1: Start the Server**
+You must start the server first. Set the transport to `sse` using an environment variable or modify the default in `server.py`.
+
+```bash
+# Start server in SSE mode (listening on port 8050)
+MCP_TRANSPORT=sse uv run mcpserver/server.py
+```
+
+**Step 2: Run the SSE Client**
+In a separate terminal, run the client:
+
+```bash
+uv run mcpserver/client-sse.py
+```
+
+### Server Configuration
+
+The server is configured in `mcpserver/server.py`:
 - **Name**: `weather`
+- **Host**: `0.0.0.0` (SSE transport only)
+- **Port**: `8050` (SSE transport only)
 
 ## Transport Protocol: STDIO
 
@@ -226,8 +261,10 @@ STDIO transport is ideal for:
 
 ```
 custom_mcp_server/
-├── server/
-│   └── weather.py      # MCP server implementation
+├── mcpserver/
+│   ├── server.py       # MCP server implementation
+│   ├── client-sse.py   # SSE client
+│   └── client-stdio.py # STDIO client
 ├── README.md           # This file
 ├── pyproject.toml      # Project dependencies
 └── requirements.txt    # Python requirements
