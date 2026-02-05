@@ -4,6 +4,7 @@
 ![MCP](https://img.shields.io/badge/MCP-1.26.0+-green.svg)
 ![FastMCP](https://img.shields.io/badge/FastMCP-Server-orange.svg)
 ![STDIO](https://img.shields.io/badge/transport-STDIO-purple.svg)
+[![mcp-use](https://img.shields.io/badge/mcp--use-Client-yellow.svg)](https://github.com/mcp-use/mcp-use)
 
 A basic implementation of a Model Context Protocol (MCP) server that provides weather information using the National Weather Service API.
 
