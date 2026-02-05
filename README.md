@@ -86,6 +86,58 @@ The **MCP Inspector** is an MCP Host that allows you to interact with your serve
 - Wind speed and direction
 - Detailed forecast description
 
+## Using with MCP Hosts (Claude Desktop, Antigravity, Cursor, etc.)
+
+Once you've tested your server with MCP Inspector, you can use it with production MCP hosts.
+
+### Installation
+
+To install the server in Claude desktop app:
+
+```bash
+uv run mcp install server/weather.py
+```
+
+### Configuration
+
+Configure your MCP host by adding this to your MCP tools configuration file:
+
+**Configuration locations:**
+- **Claude Desktop**: File -> Settings -> Developer
+- **Antigravity**: Toggle Agent -> Aditional Options (3 dots on top-right corner) -> MCP Servers -> Mange MCP Servers -> View Raw Config
+- **Cursor**: File -> Preferences -> Cursor Settings -> MCP
+
+**JSON Configuration:**
+
+```json
+{
+    "mcpServers": {
+        "weather": {
+            "command": "uv",
+            "args": [
+                "run",
+                "--with",
+                "mcp[cli]",
+                "mcp",
+                "run",
+                ".../custom_mcp_server/server/weather.py"
+            ]
+        }
+    }
+}
+```
+
+> **Important**: Update the absolute path in the `args` array to match your local installation path.
+
+### Testing with MCP Host
+
+After configuration, restart your MCP host application and test with queries like:
+- "What are the current weather alerts in California?"
+- "Give me the weather forecast for San Francisco."
+
+#### Example: Using Weather MCP Server with Antigravity
+<img src="assets/mcpserver_with_mcp_host.png" width=1000/>
+
 ## Server Configuration
 
 The server is configured in `server/weather.py`:
