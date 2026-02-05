@@ -1,5 +1,10 @@
 # MCP Server Demo
 
+![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
+![MCP](https://img.shields.io/badge/MCP-1.26.0+-green.svg)
+![FastMCP](https://img.shields.io/badge/FastMCP-Server-orange.svg)
+![STDIO](https://img.shields.io/badge/transport-STDIO-purple.svg)
+
 A basic implementation of a Model Context Protocol (MCP) server that provides weather information using the National Weather Service API.
 
 ## What is MCP?
