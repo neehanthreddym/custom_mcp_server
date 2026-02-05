@@ -1,6 +1,6 @@
 # MCP Server Demo
 
-![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.13+-blue.svg?logo=python&logoColor=white)
 ![MCP](https://img.shields.io/badge/MCP-1.26.0+-green.svg)
 ![FastMCP](https://img.shields.io/badge/FastMCP-Server-orange.svg)
 ![STDIO](https://img.shields.io/badge/transport-STDIO-purple.svg)
