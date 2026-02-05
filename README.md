@@ -143,6 +143,41 @@ After configuration, restart your MCP host application and test with queries lik
 #### Example: Using Weather MCP Server with Antigravity
 <img src="assets/mcpserver_with_mcp_host.png" width=1000/>
 
+## Using with Chatbot CLI
+
+You can also integrate the MCP server tools directly into a custom chatbot CLI using the **`mcp-use`** library. This approach allows you to build conversational interfaces that can leverage MCP tools.
+
+### Running the Chatbot CLI
+
+Run the interactive chatbot with:
+
+```bash
+uv run server/client.py
+```
+
+The chatbot provides:
+- **Memory-enabled conversations**: Maintains context across multiple queries
+- **Interactive commands**: 
+  - Type `exit`, `quit`, or `q` to quit
+  - Type `clear` or `cls` to clear conversation history
+- **Tool integration**: Automatically uses MCP weather tools when relevant
+
+### Implementation Overview
+
+The chatbot (`server/client.py`) showcases:
+- **MCP Client Integration**: Loads server configuration from `server/weather.json`
+- **LangChain Integration**: Uses ChatGroq LLM with the MCP agent
+- **Memory Management**: Enables conversation history tracking
+- **Error Handling**: Graceful error handling and logging
+
+### Example Interactions
+
+#### Interactive CLI Interface
+<img src="assets/integrate_mcp_tool_with_chatbot_cli.png" width=800/>
+
+#### Assistant Response with Tool Usage
+<img src="assets/integrate_mcp_tool_with_chatbot_cli_Assistant.png" width=800/>
+
 ## Server Configuration
 
 The server is configured in `server/weather.py`:
